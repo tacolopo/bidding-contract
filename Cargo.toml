@@ -1,7 +1,7 @@
 [package]
 name = "cw-minimal"
 version = "0.1.0"
-authors = ["tacolopo <106569305+tacolopo@users.noreply.github.com>"]
+authors = ["tacolopo"]
 edition = "2021"
 
 exclude = [
@@ -50,4 +50,5 @@ serde = { version = "1.0.145", default-features = false, features = ["derive"] }
 thiserror = { version = "1.0.31" }
 
 [dev-dependencies]
+cosmwasm-schema = "1.1.1"
 cw-multi-test = "0.15.1"
