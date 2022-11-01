@@ -1,11 +1,12 @@
 #[cfg(not(feature = "library"))]
-use cosmwasm_std::{StdError, entry_point};
+use cosmwasm_std::{entry_point, StdError};
 use cosmwasm_std::{Binary, Deps, DepsMut, Env, MessageInfo, Response, StdResult};
 use cw2::{get_contract_version, set_contract_version};
 
 use crate::coin_helpers::assert_sent_exact_coin;
 use crate::error::ContractError;
-use crate::msg::{ExecuteMsg, InstantiateMsg, QueryMsg};
+use crate::msg::{ExecuteMsg, InstantiateMsg, MigrateMsg, QueryMsg};
+use crate::state::{Config, CONFIG};
 
 const CONTRACT_NAME: &str = "crates.io:cw-minimal";
 const CONTRACT_VERSION: &str = env!("CARGO_PKG_VERSION");
@@ -20,7 +21,7 @@ pub fn instantiate(
     _msg: InstantiateMsg,
 ) -> Result<Response, ContractError> {
     if info.sender != ADMIN {
-        return Err(ContractError::Unauthorized {  });
+        return Err(ContractError::Unauthorized {});
     }
     set_contract_version(deps.storage, CONTRACT_NAME, CONTRACT_VERSION)?;
     let validated_admin = deps.api.addr_validate(ADMIN)?;
@@ -31,34 +32,29 @@ pub fn instantiate(
     Ok(Response::new()
         .add_attribute("action", "instantiate")
         .add_attribute("admin", validated_admin.to_string()))
-}   
+}
 
 #[entry_point]
 pub fn execute(
-    _deps: DepsMut,
-    _env: Env,
-    _info: MessageInfo,
-    _msg: ExecuteMsg,
+    deps: DepsMut,
+    env: Env,
+    info: MessageInfo,
+    msg: ExecuteMsg,
 ) -> Result<Response, ContractError> {
     match msg {
-        ExecuteMsg::Example {
-            data,
-            data1,
-            data2,
-        } => execute_example(deps, env, info, data, data1, data2),
+        ExecuteMsg::Example { data, data1, data2 } => {
+            execute_example(deps, env, info, data, data1, data2)
+        }
     }
     unimplemented!()
 }
 
 #[entry_point]
-pub fn query(_deps: Deps, _env: Env, _msg: QueryMsg) -> StdResult<Binary> {
-    unimplemented!()
+pub fn query(deps: Deps, env: Env, msg: QueryMsg) -> StdResult<Binary> {
+    match msg {
+        QueryMsg::Example {} => query_msg_example(deps, env),
+    }
 }
-
-//pagination
-const MAX_LIMIT: u32 = 30;
-const DEFAULT_LIMIT: u32 = 10;
-
 
 #[entry_point]
 pub fn migrate(deps: DepsMut, _env: Env, _msg: MigrateMsg) -> Result<Response, ContractError> {
