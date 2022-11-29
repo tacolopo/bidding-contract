@@ -8,10 +8,10 @@ use crate::error::ContractError;
 use crate::msg::{ExecuteMsg, InstantiateMsg, MigrateMsg, QueryMsg};
 use crate::state::{Config, CONFIG};
 
-const CONTRACT_NAME: &str = "crates.io:cw-minimal";
+const CONTRACT_NAME: &str = env!("CARGO_PKG_NAME");
 const CONTRACT_VERSION: &str = env!("CARGO_PKG_VERSION");
-const ADMIN: &str = "crypto_address";
-const CRYPTO: &str = "ucrypto";
+const ADMIN: &str = "juno1w5aespcyddns7y696q9wlch4ehflk2wglu9vv4";
+const CRYPTO: &str = "ujuno";
 
 #[entry_point]
 pub fn instantiate(

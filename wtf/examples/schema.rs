@@ -3,8 +3,8 @@ use std::fs::create_dir_all;
 
 use cosmwasm_schema::{export_schema, remove_schemas, schema_for};
 
-use wtf::msg::{ExecuteMsg, InstantiateMsg, QueryMsg};
-use wtf::state::Config;
+use bidding_contract::msg::{ExecuteMsg, InstantiateMsg, QueryMsg};
+use bidding_contract::state::Config;
 
 fn main() {
     let mut out_dir = current_dir().unwrap();
