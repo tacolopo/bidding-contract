@@ -1,2 +1,2 @@
-# cw-minimal
-A template I made for minimal contract design
+# bidding contract
+Test for academy
