@@ -11,4 +11,6 @@ pub struct Config {
 }
 
 pub const CONFIG: Item<Config> = Item::new("config");
+pub const WINNING: Item<Uint128> = Item::new("highest_bid");
 pub const DONATION_COUNT: Map<Addr, Uint128> = Map::new("donations");
+pub const OPEN: Item<bool> = Item::new("contract_state");

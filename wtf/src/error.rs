@@ -9,6 +9,15 @@ pub enum ContractError {
     #[error("Unauthorized")]
     Unauthorized {},
 
-    #[error("Not Enough Funds")]
-    NotEnoughFunds { needed: String, received: String },
+    #[error("No Funds")]
+    NoFunds {},
+
+    #[error("Bid is too low")]
+    BidTooLow {},
+
+    #[error("Contract is closed")]
+    ContractClosed {},
+
+    #[error("Cannot withdraw when contract still open")]
+    CannotWithdraw{},
 }
