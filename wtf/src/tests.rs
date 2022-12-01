@@ -92,5 +92,5 @@ fn test_withdraw_restrictions() {
     let _res = execute(deps.as_mut(), env.clone(), info.clone(), msg.clone()).unwrap();
     //withdraw funds should fail since contract still open
     let msg = ExecuteMsg::Retrieve { friend: None };
-    let _res = execute(deps.as_mut(), env.clone(), info, msg).unwrap();
+    let _res = execute(deps.as_mut(), env.clone(), info, msg).unwrap_err();
 }
